@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option java_package = "ru.itis.hrservice.grpc.pb.cv";
+option java_multiple_files = true;
+
+service CVService {
+    rpc GetAllCVs(GetAllCVsRequest) returns (GetAllCVsResponse) {}
+}
+
+message CVRequest {
+    string id = 1;
+}
+
+message CVResponse {
+    string id = 1;
+    string skill = 2;
+}
+
+message GetAllCVsRequest {
+}
+
+message GetAllCVsResponse {
+    repeated CVResponse cvs = 1;
+}

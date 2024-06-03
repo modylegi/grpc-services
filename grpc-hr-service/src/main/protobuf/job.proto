@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option java_package = "ru.itis.hrservice.grpc.pb.job";
+option java_multiple_files = true;
+
+service JobService {
+    rpc GetAllJobs(GetAllJobsRequest) returns (GetAllJobsResponse) {}
+}
+
+message JobRequest {
+    string id = 1;
+}
+
+message JobResponse {
+    string id = 1;
+    string requirement = 2;
+}
+
+message GetAllJobsRequest {
+}
+
+message GetAllJobsResponse {
+    repeated JobResponse jobs = 1;
+}
