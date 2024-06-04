@@ -1,0 +1,48 @@
+services:
+  HRService:
+    image: HRService:latest
+    container_name: HRService
+    depends_on:
+      - CvService
+      - JobService
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    networks:
+      - net
+  CvService:
+    image: CvService:latest
+    depends_on:
+      - mongo
+    container_name: CvService
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    networks:
+      - net
+  JobService:
+    image: JobService:latest
+    depends_on:
+      - mongo
+    container_name: JobService
+    ports:
+      - "4000:4000"
+    env_file:
+      - .env
+    networks:
+      - net
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - "/var/lib/mongodb:/data/db"
+    networks:
+      - net
+
+networks:
+  net:
+    driver: bridge
